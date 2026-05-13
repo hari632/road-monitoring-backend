@@ -4,8 +4,11 @@ import com.example.rooad.dto.RoadDataRequest;
 import com.example.rooad.dto.RoadDataResponse;
 import com.example.rooad.model.RoadData;
 import com.example.rooad.service.RoadDataService;
+
 import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -19,39 +22,7 @@ public class RoadDataController {
 
     private final RoadDataService service;
 
-
-
-
-
-    @GetMapping
-    public List<RoadData> getAll() {
-        return service.getAll();
-    }
-
-    // 📥 GET by ID
-    @GetMapping("/{id}")
-    public RoadData getById(@PathVariable String id) {
-        return service.getById(id);
-    }
-
-    // 📥 Filter by condition
-    @GetMapping("/filter")
-    public List<RoadData> filterByCondition(@RequestParam String condition) {
-        return service.getByCondition(condition);
-    }
-
-    // 📥 Filter by date range
-    @GetMapping("/date-range")
-    public List<RoadData> filterByDate(
-            @RequestParam String start,
-            @RequestParam String end) {
-
-        return service.getByDateRange(
-                LocalDateTime.parse(start),
-                LocalDateTime.parse(end)
-        );
-
-    }
+    // CREATE
     @PostMapping
     public RoadDataResponse save(@Valid @RequestBody RoadDataRequest request) {
 
@@ -74,5 +45,50 @@ public class RoadDataController {
                 .severityScore(saved.getSeverityScore())
                 .timestamp(saved.getTimestamp())
                 .build();
+    }
+
+    // READ ALL
+    @GetMapping
+    public List<RoadData> getAll() {
+        return service.getAll();
+    }
+
+    // READ BY ID
+    @GetMapping("/{id}")
+    public RoadData getById(@PathVariable String id) {
+        return service.getById(id);
+    }
+
+    // FILTER BY CONDITION
+    @GetMapping("/condition/{condition}")
+    public List<RoadData> getByCondition(@PathVariable String condition) {
+        return service.getByCondition(condition);
+    }
+
+    // DATE RANGE
+    @GetMapping("/date-range")
+    public List<RoadData> getByDateRange(
+            @RequestParam LocalDateTime start,
+            @RequestParam LocalDateTime end) {
+
+        return service.getByDateRange(start, end);
+    }
+
+    // UPDATE
+    @PutMapping("/{id}")
+    public RoadData updateRoadData(
+            @PathVariable String id,
+            @RequestBody RoadData updatedData) {
+
+        return service.updateRoadData(id, updatedData);
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public String deleteRoadData(@PathVariable String id) {
+
+        service.deleteRoadData(id);
+
+        return "Road data deleted successfully";
     }
 }
