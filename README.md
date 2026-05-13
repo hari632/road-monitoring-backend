@@ -15,4 +15,4 @@
 mvn spring-boot:run
 
 ## Swagger
-http://localhost:8080/swagger-ui/index.html
+https://roadmonitor-3ph1.onrender.com/swagger-ui/index.html
