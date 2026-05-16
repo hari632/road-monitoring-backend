@@ -18,6 +18,7 @@ public class RoadData {
 
     private double latitude;
     private double longitude;
+    private String locationName;
 
     private double vibration;
     private double speed;

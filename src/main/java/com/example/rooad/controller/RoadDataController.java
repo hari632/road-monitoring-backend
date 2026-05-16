@@ -31,6 +31,7 @@ public class RoadDataController {
                 .longitude(request.getLongitude())
                 .vibration(request.getVibration())
                 .speed(request.getSpeed())
+                .locationName(request.getLocationName())
                 .build();
 
         RoadData saved = service.processAndSave(data);
@@ -41,6 +42,7 @@ public class RoadDataController {
                 .longitude(saved.getLongitude())
                 .vibration(saved.getVibration())
                 .speed(saved.getSpeed())
+                .locationName(saved.getLocationName())
                 .roadCondition(saved.getRoadCondition())
                 .severityScore(saved.getSeverityScore())
                 .timestamp(saved.getTimestamp())

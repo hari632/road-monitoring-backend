@@ -14,6 +14,7 @@ public class RoadDataResponse {
     private double longitude;
     private double vibration;
     private double speed;
+    private String locationName;
     private String roadCondition;
     private int severityScore;
     private LocalDateTime timestamp;

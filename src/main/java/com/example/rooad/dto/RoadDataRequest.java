@@ -20,4 +20,5 @@ public class RoadDataRequest {
     @Min(value = 0, message = "Speed must be >= 0")
     @Max(value = 150, message = "Speed must be <= 150")
     private Double speed;
+    private String locationName;
 }
