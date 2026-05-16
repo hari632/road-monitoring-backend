@@ -13,22 +13,27 @@ import java.util.List;
 public class RoadDataService {
 
     private final RoadDataRepository repository;
+    private final AiService aiService;
 
     // CREATE
     public RoadData processAndSave(RoadData data) {
 
         double vibration = data.getVibration();
 
-        if (vibration < 3) {
-            data.setRoadCondition("SMOOTH");
+        String prediction = aiService.getPrediction(
+                data.getVibration(),
+                data.getSpeed()
+        );
+
+        data.setRoadCondition(prediction);
+
+        if(prediction.equals("SMOOTH")) {
             data.setSeverityScore(1);
-
-        } else if (vibration < 7) {
-            data.setRoadCondition("MINOR_POTHOLE");
+        }
+        else if(prediction.equals("MINOR_POTHOLE")) {
             data.setSeverityScore(5);
-
-        } else {
-            data.setRoadCondition("MAJOR_POTHOLE");
+        }
+        else {
             data.setSeverityScore(9);
         }
 
