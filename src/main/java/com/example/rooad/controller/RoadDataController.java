@@ -36,7 +36,7 @@ public class RoadDataController {
 
         RoadData saved = service.processAndSave(data);
 
-        return RoadDataResponse.builder()
+        RoadDataResponse build = RoadDataResponse.builder()
                 .id(saved.getId())
                 .latitude(saved.getLatitude())
                 .longitude(saved.getLongitude())
@@ -47,6 +47,7 @@ public class RoadDataController {
                 .severityScore(saved.getSeverityScore())
                 .timestamp(saved.getTimestamp())
                 .build();
+        return build;
     }
 
     // READ ALL
